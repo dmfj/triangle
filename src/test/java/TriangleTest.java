@@ -11,8 +11,16 @@ public class TriangleTest {
     @Test
     public void checkIfNotEmpty() {
 
-        Triangle triangle = new Triangle(Arrays.asList("10", "11", "12"));
+        Triangle triangle = new Triangle(Arrays.asList());
         assertNotNull(triangle);
+
+    }
+
+    @Test(expected=NumberFormatException.class)
+    public void checkIfIntegers() {
+
+        Triangle triangle = new Triangle(Arrays.asList("10", "potato", "12"));
+        triangle.checkIntegerValues();
 
     }
 
@@ -29,8 +37,8 @@ public class TriangleTest {
     public void checkIfEquilateral() {
 
         Triangle triangle = new Triangle(Arrays.asList("10", "10", "10"));
-        Integer testResult = triangle.checkTriangleType();
-        assertEquals(testResult, Triangle.EQUILATERAL);
+        TriangleType testResult = triangle.checkTriangleType();
+        assertEquals(testResult, TriangleType.EQUILATERAL);
 
     }
 
@@ -38,8 +46,8 @@ public class TriangleTest {
     public void checkIfIsosceles() {
 
         Triangle triangle = new Triangle(Arrays.asList("10", "11", "10"));
-        Integer testResult = triangle.checkTriangleType();
-        assertEquals(testResult, Triangle.ISOSCELES);
+        TriangleType testResult = triangle.checkTriangleType();
+        assertEquals(testResult, TriangleType.ISOSCELES);
 
     }
 
@@ -47,8 +55,8 @@ public class TriangleTest {
     public void checkIfScalene() {
 
         Triangle triangle = new Triangle(Arrays.asList("10", "11", "12"));
-        Integer testResult = triangle.checkTriangleType();
-        assertEquals(testResult, Triangle.SCALENE);
+        TriangleType testResult = triangle.checkTriangleType();
+        assertEquals(testResult, TriangleType.SCALENE);
 
     }
 }

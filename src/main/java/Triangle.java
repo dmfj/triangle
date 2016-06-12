@@ -5,10 +5,6 @@ import java.util.List;
  */
 public class Triangle {
 
-    public static final Integer EQUILATERAL = 2;
-    public static final Integer ISOSCELES = 1;
-    public static final Integer SCALENE = 0;
-
     private List<String> sizes;
 
     public Triangle(List sizes) {
@@ -19,7 +15,15 @@ public class Triangle {
         return sizes.size() == 3;
     }
 
-    public Integer checkTriangleType() {
+    public void checkIntegerValues() throws NumberFormatException{
+
+        for (String size : sizes) {
+            Integer.parseInt(size);
+        }
+
+    }
+
+    public TriangleType checkTriangleType() {
         Integer positiveComparisonCounter = 0;
 
         // Loops through the list of sizes to compare every single one
@@ -35,12 +39,12 @@ public class Triangle {
             }
 
             //If 2 comparisons are true, no need to compare anymore
-            if (positiveComparisonCounter.equals(EQUILATERAL)) {
+            if (TriangleType.getTriangleType(positiveComparisonCounter) == TriangleType.EQUILATERAL) {
                 break;
             }
         }
 
-        return positiveComparisonCounter;
+        return TriangleType.getTriangleType(positiveComparisonCounter);
     }
 
 }
