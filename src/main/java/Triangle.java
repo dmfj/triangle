@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -5,34 +6,55 @@ import java.util.List;
  */
 public class Triangle {
 
-    private List<String> sizes;
+    private List<Double> lengths;
 
-    public Triangle(List sizes) {
-        this.sizes = sizes;
+    public Triangle(List lengths) throws NumberFormatException{
+        lengths = new ArrayList<Double>();
+
+        for (Object size : lengths) {
+            this.lengths.add(Double.parseDouble(String.valueOf(size)));
+        }
     }
 
-    public Boolean validateTriangle() {
-        return sizes.size() == 3;
+    /**
+     * Verifies if we have 3 lengths
+     * @return true if size of list is 3; false if any other
+     */
+    public Boolean hasThreeLengths() {
+        return lengths.size() == 3;
     }
 
-    public void checkLongValues() throws NumberFormatException{
+    /**
+     * Validates if the lengths are positive values
+     * @return true if all elements of the lengths list are positive; false if any is negative
+     */
+    public Boolean hasOnlyPositiveValues() {
+        Boolean allArePositive = true;
 
-        for (String size : sizes) {
-            Long.parseLong(size);
+        for (Double length : lengths) {
+            if (length <= 0) {
+                allArePositive = false;
+                break;
+            }
         }
 
+        return allArePositive;
     }
 
-    public TriangleType checkTriangleType() {
+    /**
+     * Checks the type of triangle
+     * @return TriangleType object that can be EQUILATERAL, ISOSCELES or SCALENE
+     */
+    public TriangleType getTriangleType() {
         Integer positiveComparisonCounter = 0;
 
-        // Loops through the list of sizes to compare every single one
+        // Loops through the list of lengths to compare every single one
         // with all the others avoiding repetitions
-        for (int i = 0; i < sizes.size(); i++) {
-            for (int j = i + 1; j < sizes.size(); j++) {
+        for (int i = 0; i < lengths.size(); i++) {
+            for (int j = i + 1; j < lengths.size(); j++) {
 
-                //Checks if the sizes are the same and increments the number of positive comparisons if so
-                if (sizes.get(i).contentEquals(sizes.get(j))) {
+                //Checks if the lengths are the same and increments the number of positive comparisons if so
+                if (lengths.get(i).equals(lengths.get(j))) {
                     positiveComparisonCounter += 1;
                 }
 
@@ -47,4 +69,31 @@ public class Triangle {
         return TriangleType.getTriangleType(positiveComparisonCounter);
     }
 
+    /**
+     * Validates the triangle inequality, which states that the sum of 2 sides of a triangle are always
+     * bigger than / equal to the remaining side
+     * @return true if triangle inequality verifies; false if not
+     */
+    public Boolean validateInequality() {
+
+        Boolean validated = true;
+
+        for (int i = 0; i < lengths.size(); i++) {
+
+            Double sumOfTheOtherTwo = 0.0;
+
+            for (int j = 0; j < lengths.size(); j++) {
+                if (i != j) {
+                    sumOfTheOtherTwo += lengths.get(j);
+                }
+            }
+
+            if (sumOfTheOtherTwo < lengths.get(i)) {
+                validated = false;
+                break;
+            }
+        }
+
+        return validated;
+    }
 }

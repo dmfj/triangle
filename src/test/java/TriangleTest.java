@@ -17,10 +17,18 @@ public class TriangleTest {
     }
 
     @Test(expected=NumberFormatException.class)
-    public void checkIfLongs() {
+    public void checkIfNotLongs() {
 
-        Triangle triangle = new Triangle(Arrays.asList("10", "potato", "12.2"));
-        triangle.checkLongValues();
+        new Triangle(Arrays.asList("10", "potato", "12.2"));
+
+    }
+
+    @Test
+    public void checkIfPositives() {
+
+        Triangle triangle = new Triangle(Arrays.asList("10", "-11", "12"));
+        Boolean testResult = triangle.hasOnlyPositiveValues();
+        assertEquals(testResult, false);
 
     }
 
@@ -28,8 +36,17 @@ public class TriangleTest {
     public void checkIfTriangle() {
 
         Triangle triangle = new Triangle(Arrays.asList("10", "11", "12.3"));
-        Boolean testResult = triangle.validateTriangle();
+        Boolean testResult = triangle.hasThreeLengths();
         assertEquals(testResult, true);
+
+    }
+
+    @Test
+    public void checkTriangleInequality() {
+
+        Triangle triangle = new Triangle(Arrays.asList("23", "2.3", "11"));
+        Boolean testResult = triangle.validateInequality();
+        assertEquals(testResult, false);
 
     }
 
@@ -37,7 +54,7 @@ public class TriangleTest {
     public void checkIfEquilateral() {
 
         Triangle triangle = new Triangle(Arrays.asList("10", "10", "10"));
-        TriangleType testResult = triangle.checkTriangleType();
+        TriangleType testResult = triangle.getTriangleType();
         assertEquals(testResult, TriangleType.EQUILATERAL);
 
     }
@@ -46,7 +63,7 @@ public class TriangleTest {
     public void checkIfIsosceles() {
 
         Triangle triangle = new Triangle(Arrays.asList("10.4", "11", "10.4"));
-        TriangleType testResult = triangle.checkTriangleType();
+        TriangleType testResult = triangle.getTriangleType();
         assertEquals(testResult, TriangleType.ISOSCELES);
 
     }
@@ -55,7 +72,7 @@ public class TriangleTest {
     public void checkIfScalene() {
 
         Triangle triangle = new Triangle(Arrays.asList("10", "11", "12"));
-        TriangleType testResult = triangle.checkTriangleType();
+        TriangleType testResult = triangle.getTriangleType();
         assertEquals(testResult, TriangleType.SCALENE);
 
     }
