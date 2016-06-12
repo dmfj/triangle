@@ -8,11 +8,11 @@ public class Triangle {
 
     private List<Double> lengths;
 
-    public Triangle(List lengths) throws NumberFormatException{
-        lengths = new ArrayList<Double>();
+    Triangle(List lengths) throws NumberFormatException{
+        this.lengths = new ArrayList<Double>();
 
-        for (Object size : lengths) {
-            this.lengths.add(Double.parseDouble(String.valueOf(size)));
+        for (Object length : lengths) {
+            this.lengths.add(Double.parseDouble(String.valueOf(length)));
         }
     }
 
@@ -95,5 +95,20 @@ public class Triangle {
         }
 
         return validated;
+    }
+
+    /**
+     * Checks if the triangle lengths provided are valid and can be used
+     * @return true if we have 3 lengths, positive values and triangle inequality is verified; false otherwise
+     */
+    public Boolean isValidTriangle() {
+        return this.hasThreeLengths() && this.hasOnlyPositiveValues() && this.validateInequality();
+    }
+
+    @Override
+    public String toString() {
+        return "Triangle{" +
+                "lengths=" + lengths +
+                '}';
     }
 }
