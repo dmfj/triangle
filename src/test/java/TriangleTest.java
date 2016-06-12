@@ -17,17 +17,17 @@ public class TriangleTest {
     }
 
     @Test(expected=NumberFormatException.class)
-    public void checkIfIntegers() {
+    public void checkIfLongs() {
 
-        Triangle triangle = new Triangle(Arrays.asList("10", "potato", "12"));
-        triangle.checkIntegerValues();
+        Triangle triangle = new Triangle(Arrays.asList("10", "potato", "12.2"));
+        triangle.checkLongValues();
 
     }
 
     @Test
     public void checkIfTriangle() {
 
-        Triangle triangle = new Triangle(Arrays.asList("10", "11", "12"));
+        Triangle triangle = new Triangle(Arrays.asList("10", "11", "12.3"));
         Boolean testResult = triangle.validateTriangle();
         assertEquals(testResult, true);
 
@@ -45,7 +45,7 @@ public class TriangleTest {
     @Test
     public void checkIfIsosceles() {
 
-        Triangle triangle = new Triangle(Arrays.asList("10", "11", "10"));
+        Triangle triangle = new Triangle(Arrays.asList("10.4", "11", "10.4"));
         TriangleType testResult = triangle.checkTriangleType();
         assertEquals(testResult, TriangleType.ISOSCELES);
 

@@ -15,10 +15,10 @@ public class Triangle {
         return sizes.size() == 3;
     }
 
-    public void checkIntegerValues() throws NumberFormatException{
+    public void checkLongValues() throws NumberFormatException{
 
         for (String size : sizes) {
-            Integer.parseInt(size);
+            Long.parseLong(size);
         }
 
     }
