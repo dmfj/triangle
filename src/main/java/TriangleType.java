@@ -1,4 +1,3 @@
-import javax.print.attribute.standard.MediaSize;
 
 /**
  * Created by jorged on 11/06/2016.
